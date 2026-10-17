@@ -47,6 +47,21 @@ def _education_level(text):
     return np.nan
 
 
+def _purchase_influence(text):
+    """0 = none, 1 = some, 2 = major. Puts the 2023/24 wording ("little / some /
+    great deal of influence") and the 2025 wording ("No" / "Yes, I ...") on one scale."""
+    if pd.isna(text):
+        return np.nan
+    t = text.lower()
+    if "great deal" in t or ("substantial" in t and "not a substantial" not in t):
+        return 2
+    if "some influence" in t or t.startswith("yes"):
+        return 1
+    if "little or no" in t or t == "no":
+        return 0
+    return np.nan
+
+
 def add_basic_features(df):
     """Add numeric Age, YearsCode, EdLevel, WorkExp (with plausibility
     checks), a missing-experience flag, and a youth flag."""
@@ -71,6 +86,7 @@ def add_basic_features(df):
     out["WorkExp_num"] = out["WorkExp_num"].mask(bad_work)
 
     out["EdLevel_ord"] = out["EdLevel"].map(_education_level)
+    out["PurchaseInfluence_ord"] = out["PurchaseInfluence"].map(_purchase_influence)
     out["WorkExp_missing"] = out["WorkExp_num"].isna().astype(int)
     out["IsYouth"] = out["Age"].isin(["Under 18 years old", "18-24 years old"])
     return out

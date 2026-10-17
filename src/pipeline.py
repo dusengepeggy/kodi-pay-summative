@@ -12,10 +12,13 @@ MULTI = ["LanguageHaveWorkedWith", "DatabaseHaveWorkedWith",
          "PlatformHaveWorkedWith", "WebframeHaveWorkedWith",
          "DevType", "LearnCode"]
 JOB_CONTEXT = ["OrgSize", "RemoteWork", "ICorPM", "Industry"]
+# Columns added in experiment 14 (same answer options in every survey year)
+EXTRA_NUMERIC = ["PurchaseInfluence_ord"]
+EXTRA_MULTI = ["OfficeStackAsyncHaveWorkedWith", "OpSysProfessional use"]
 
 
 def build_preprocessor(use_job_context=False, use_country=False, min_freq=0.01,
-                       multi_cols=MULTI, skill_counts=False):
+                       multi_cols=MULTI, skill_counts=False, extra_features=False):
     """Return a ColumnTransformer for the chosen feature group."""
     numeric_pipe = Pipeline([
         ("impute", SimpleImputer(strategy="median")),
@@ -27,8 +30,9 @@ def build_preprocessor(use_job_context=False, use_country=False, min_freq=0.01,
     ])
 
     parts = [
-        ("num", numeric_pipe, NUMERIC),
-        ("multi", MultiHotEncoder(min_freq=min_freq), list(multi_cols)),
+        ("num", numeric_pipe, NUMERIC + (EXTRA_NUMERIC if extra_features else [])),
+        ("multi", MultiHotEncoder(min_freq=min_freq),
+         list(multi_cols) + (EXTRA_MULTI if extra_features else [])),
     ]
     if skill_counts:
         parts.append(("counts", Pipeline([("count", SkillCounts()),
