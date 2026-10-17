@@ -1,7 +1,7 @@
 {
   "exp_id": 5,
   "name": "HistGradientBoosting (tuned)",
-  "run_id": "exp5-1bd8fe07",
+  "run_id": "exp5-a729522b",
   "settings": {
     "features": "core + job context",
     "search": "learning_rate, max_leaf_nodes, max_depth, min_samples_leaf, l2",
@@ -90,7 +90,7 @@
     "estimator__transform_input": "None",
     "estimator__verbose": "False",
     "n_iter": "20",
-    "n_jobs": "-1",
+    "n_jobs": "4",
     "param_distributions": "{'clf__learning_rate': <scipy.stats._distn_infrastructure.rv_continuous_frozen object>, 'clf__max_leaf_nodes': [15, 31, 63], 'clf__max_depth': [None, 4, 6, 8], 'clf__min_samples_leaf': [20, 50, 100], 'clf__l2_regularization': <scipy.stats._distn_infrastructure.rv_continuous_frozen object>}",
     "pre_dispatch": "'2*n_jobs'",
     "random_state": "42",
@@ -99,9 +99,9 @@
     "scoring": "'f1_macro'",
     "verbose": "0"
   },
-  "config_hash": "1bd8fe07b00a",
+  "config_hash": "a729522bfae5",
   "data_hash": "a3b55172e950",
-  "code_hash": "8a8ca57fbd26",
+  "code_hash": "e721e73aa239",
   "versions": {
     "python": "3.14.7",
     "numpy": "2.5.4",
@@ -109,8 +109,8 @@
     "scikit-learn": "1.9.1",
     "tensorflow": "2.22.0-rc0"
   },
-  "timestamp": "2026-10-17T11:14:34",
-  "fit_seconds": 913.3,
+  "timestamp": "2026-10-17T14:26:07",
+  "fit_seconds": 2030.5,
   "n_train": 50128,
   "n_val": 10742,
   "metrics": {
