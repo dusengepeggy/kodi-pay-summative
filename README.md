@@ -49,7 +49,24 @@ Developed with Python 3.14.7 (exact package versions in `requirements.txt`).
 
 ## Results
 
-RESULTS_PLACEHOLDER
+22 experiments plus an 8-run Keras grid are logged in `results/experiments.csv` (validation set). The final models were chosen on validation and scored **once** on the 10,742-row test set (`results/test_results.csv`):
+
+| Model | Test accuracy | Test macro-F1 | Test ROC-AUC (OvR) | Youth macro-F1 |
+|---|---|---|---|---|
+| Majority-class baseline (validation) | 0.334 | 0.167 | 0.500 | – |
+| Logistic regression, core features (exp 1, validation) | 0.540 | 0.529 | 0.720 | 0.400 |
+| **HistGradientBoosting** (exp 14) → `models/best_traditional.joblib` | 0.608 | 0.605 | 0.791 | 0.483 |
+| **Keras Functional with embeddings** (exp 15a) → `models/best_keras.keras` | 0.604 | 0.603 | 0.785 | 0.505 |
+| Ensemble of both, equal weights (exp 15) | 0.614 | 0.612 | 0.793 | 0.488 |
+
+Main findings (associations, not causes):
+- Validation and test scores agree within 0.003, so the experiments did not over-fit the validation set.
+- Deep learning matched but did not beat gradient boosting on this tabular data; the network is better for young respondents and for the middle tier.
+- Experience is the strongest predictor; after it come country (only in combination with other features), employer size, the operating systems and tools used at work, and the language stack.
+- The `Mid` tier is the hardest (recall ≈ 0.44-0.46).
+- Most young people fall in the `Low` tier because tiers compare them with all developers. With an experience-adjusted label (exp 11), skills and employer still separate pay within the same experience band.
+
+Figures are in `figures/`; the notebook explains each experiment before and after it runs.
 
 ## Limitations
 

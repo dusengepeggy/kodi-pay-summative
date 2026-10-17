@@ -1,0 +1,4 @@
+,val_macro_f1,accuracy,macro_f1,roc_auc_ovr,mean_tier_error,far_error_rate,youth_accuracy,youth_macro_f1,macro_f1_drop_val_to_test
+exp 14 (HGB),0.6064,0.6085,0.6048,0.7911,0.4466,0.055,0.7263,0.4826,0.0016
+exp 15a (Keras),0.6025,0.6037,0.6026,0.7849,0.4468,0.0505,0.734,0.5047,-0.0001
+exp 15 (ensemble),0.609,0.614,0.6117,0.7932,0.4352,0.0492,0.734,0.4885,-0.0027

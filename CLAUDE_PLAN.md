@@ -177,6 +177,15 @@ Survey is self-selected; salaries are self-reported; Africa is thin after filter
 - Interpretation: tiers are relative to all developers including seniors, so low early-career tiers are largely seniority, **not evidence of underpayment**. Skill-based prediction is weak within the youth group.
 - After the rebuild, `results/experiments.csv` is the source of truth.
 
+### Final results (test set, scored once; `results/test_results.csv`)
+| Model | Test acc | Test macro-F1 | Test AUC | Youth macro-F1 |
+|---|---|---|---|---|
+| exp 14 HistGradientBoosting (best traditional) | 0.608 | 0.605 | 0.791 | 0.483 |
+| exp 15a Keras Functional (best deep learning) | 0.604 | 0.603 | 0.785 | 0.505 |
+| exp 15 ensemble (equal weights) | 0.614 | 0.612 | 0.793 | 0.488 |
+
+Decisions added during the work: Country kept (alone it is at chance, 0.321; it helps only in combination); experiment 14 adds `PurchaseInfluence` mapped to one 0-2 scale across the 2023/24 and 2025 wordings, plus office tools and OS at work; office tools carry some year information (year-probe 0.739 vs chance 0.529) and are kept with that caveat. Searches use at most 4 parallel workers because 16 workers exhausted memory on this machine.
+
 ---
 
 ## 7. Experiment roadmap (7+ required, each building on the last)
@@ -282,13 +291,14 @@ Links (GitHub, Drive, video) on page 1. Budget: Introduction ~500, Literature Re
 
 - [ ] Instructor confirmation (or documented justification) on the binned target
 - [x] `n_implausible_years` cleanup; `low_memory=False`
-- [ ] `src/` modules complete, including `dl.py`
-- [ ] Notebook runs **Restart → Run All** with no errors; markdown before and after every section
-- [ ] ≥7 documented experiments (target: 11+), table complete
-- [ ] TensorBoard logs backing the table
-- [ ] Reproducibility proof (`force=True` difference ≈ 0)
-- [ ] Learning curves, confusion matrices (all and youth), ROC/PR, subgroup analysis, bias–variance discussion
-- [ ] Test set evaluated once
-- [ ] Best sklearn + Keras models saved; Drive folder populated and public-viewable
-- [ ] `requirements.txt` pinned; README written; no raw data in git
+- [x] `src/` modules complete, including `dl.py`
+- [x] Notebook runs **Restart → Run All** with no errors; markdown before and after every section
+- [x] ≥7 documented experiments (22 + an 8-run Keras grid), table complete
+- [x] TensorBoard logs backing the table (`logs/`, `run_id` column)
+- [x] Reproducibility proof (`force=True` difference = 0; a full refit of all 28 experiments also matched exactly)
+- [x] Learning curves, confusion matrices (all and youth), ROC/PR, subgroup analysis, bias–variance discussion
+- [x] Test set evaluated once (exp 14, 15a, 15 declared before scoring)
+- [x] Best sklearn + Keras models saved (`models/best_*`); raw-data zip built
+- [ ] Drive folder populated and public-viewable; links added to README and report
+- [x] `requirements.txt` pinned; README written; no raw data in git
 - [ ] Report and video

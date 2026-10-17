@@ -1,11 +1,16 @@
-pandas
-numpy
-scikit-learn
-tensorflow
-matplotlib
-seaborn
-requests
-joblib
-tensorboard
-wandb
-ipykernel
+# Developed and tested with Python 3.14.7 on Windows 11.
+# Top-level packages pinned to the exact versions used for the results in results/.
+numpy==2.5.4
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+threadpoolctl==3.7.0
+joblib==1.6.0
+tensorflow==2.22.0rc0
+tensorboard==2.21.0
+matplotlib==3.11.2
+seaborn==0.13.2
+requests==2.34.2
+wandb==0.30.0
+ipykernel==7.4.0
+nbconvert==7.17.2

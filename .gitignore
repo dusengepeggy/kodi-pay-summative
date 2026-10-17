@@ -5,6 +5,8 @@ data/
 !results/*.csv
 models/*
 !models/best_*.joblib
+!models/best_*.keras
+!models/best_keras_pipeline/
 __pycache__/
 .ipynb_checkpoints/
 wandb/
