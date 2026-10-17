@@ -130,6 +130,7 @@ class ExperimentTracker:
         hashes = {"config_hash": _hash(self._config(name, model, settings)),
                   "data_hash": data_hash([train, self.val], self.target),
                   "code_hash": code_hash()}
+        self._run_id = f"exp{exp_id}-{hashes['config_hash'][:8]}"
         saved = self._read_json(exp_id)
         same = saved is not None and all(saved.get(k) == v for k, v in hashes.items())
 
@@ -174,8 +175,8 @@ class ExperimentTracker:
 
     def _record(self, exp_id, name, model, settings, note, hashes, metrics,
                 fit_seconds, n_train):
-        run_id = f"exp{exp_id}-{hashes['config_hash'][:8]}"
-        info = {"exp_id": exp_id, "name": name, "run_id": run_id,
+        run_id = self._run_id
+        info ={"exp_id": exp_id, "name": name, "run_id": run_id,
                 "settings": settings, "note": note, "seed": self.seed,
                 "params": model_params(model) if hasattr(model, "get_params") else {},
                 **hashes, "versions": library_versions(),
@@ -188,6 +189,7 @@ class ExperimentTracker:
         row = {"id": exp_id, "run_id": run_id, "model": name,
                "settings": json.dumps(settings, default=str),
                "best_params": json.dumps(info.get("best_params", ""), default=str),
+               "epochs_trained": info.get("epochs_trained", ""),
                "n_train": n_train, "n_val": len(self.val),
                **{k: round(v, 4) for k, v in metrics.items()},
                "fit_seconds": fit_seconds, "note": note}

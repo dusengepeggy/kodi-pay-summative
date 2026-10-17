@@ -21,8 +21,9 @@ def evaluate(model, X, y):
            "macro_f1": f1_score(y, pred, average="macro")}
     if hasattr(model, "predict_proba"):
         proba = model.predict_proba(X)
+        order = np.argsort(model.classes_)  # roc_auc_score wants sorted labels
         out["roc_auc_ovr"] = roc_auc_score(
-            y, proba, multi_class="ovr", labels=model.classes_)
+            y, proba[:, order], multi_class="ovr", labels=np.asarray(model.classes_)[order])
     return out
 
 
