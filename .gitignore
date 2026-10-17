@@ -1,8 +1,10 @@
 .venv/
 data/
-models/
 *.zip
 *.csv
+!results/*.csv
+models/*
+!models/best_*.joblib
 __pycache__/
 .ipynb_checkpoints/
 wandb/
