@@ -88,7 +88,7 @@
   },
   "config_hash": "1551ba6099bf",
   "data_hash": "a3b55172e950",
-  "code_hash": "8a8ca57fbd26",
+  "code_hash": "e721e73aa239",
   "versions": {
     "python": "3.14.7",
     "numpy": "2.5.4",
@@ -96,8 +96,8 @@
     "scikit-learn": "1.9.1",
     "tensorflow": "2.22.0-rc0"
   },
-  "timestamp": "2026-10-17T11:21:01",
-  "fit_seconds": 41.7,
+  "timestamp": "2026-10-17T14:14:26",
+  "fit_seconds": 37.9,
   "n_train": 50128,
   "n_val": 10742,
   "metrics": {

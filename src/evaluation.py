@@ -113,7 +113,7 @@ def plot_roc_pr(model, X, y, title="", name=None):
 
 
 def plot_learning_curve(estimator, X, y, title="", name=None, seed=42,
-                        sizes=(0.1, 0.25, 0.5, 0.75, 1.0), n_jobs=-1):
+                        sizes=(0.1, 0.25, 0.5, 0.75, 1.0), n_jobs=2):
     """sklearn learning curve (macro-F1, 3-fold CV on the data given)."""
     cv = StratifiedKFold(3, shuffle=True, random_state=seed)
     n, tr, va = learning_curve(estimator, X, y.astype(str), cv=cv,

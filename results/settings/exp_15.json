@@ -1,0 +1,48 @@
+{
+  "exp_id": 15,
+  "name": "Ensemble: exp 14 + exp 15a",
+  "run_id": "exp15-78ee4a0e",
+  "settings": {
+    "members": [
+      "sklearn exp 14 (exp14-8dfb4939)",
+      "keras exp 15a (exp15a-b486b9d9)"
+    ],
+    "weights": "equal"
+  },
+  "note": "soft voting, no refit",
+  "seed": 42,
+  "params": {
+    "members": "(('sklearn', '14'), ('keras', '15a'))",
+    "weights": "(1, 1)"
+  },
+  "config_hash": "78ee4a0eb406",
+  "data_hash": "a3b55172e950",
+  "code_hash": "e721e73aa239",
+  "versions": {
+    "python": "3.14.7",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "tensorflow": "2.22.0-rc0"
+  },
+  "timestamp": "2026-10-17T14:16:44",
+  "fit_seconds": 0.6,
+  "n_train": 50128,
+  "n_val": 10742,
+  "metrics": {
+    "train_accuracy": 0.6761091605489946,
+    "train_macro_f1": 0.6748634116154874,
+    "train_roc_auc_ovr": 0.8500940499654046,
+    "train_mean_tier_error": 0.36534471752314074,
+    "train_far_error_rate": 0.04145387807213533,
+    "train_youth_accuracy": 0.7804193186072632,
+    "train_youth_macro_f1": 0.5681280789809026,
+    "val_accuracy": 0.6107801154347421,
+    "val_macro_f1": 0.6090368829531735,
+    "val_roc_auc_ovr": 0.79261982050028,
+    "val_mean_tier_error": 0.43976913051573263,
+    "val_far_error_rate": 0.050549245950474775,
+    "val_youth_accuracy": 0.7359932088285229,
+    "val_youth_macro_f1": 0.4757146984065172
+  }
+}
