@@ -1,9 +1,9 @@
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, StandardScaler
 
-from src.transformers import MultiHotEncoder
+from src.transformers import MultiHotEncoder, SkillCounts
 
 TARGET = "PayTier"
 
@@ -14,7 +14,8 @@ MULTI = ["LanguageHaveWorkedWith", "DatabaseHaveWorkedWith",
 JOB_CONTEXT = ["OrgSize", "RemoteWork", "ICorPM", "Industry"]
 
 
-def build_preprocessor(use_job_context=False, use_country=False, min_freq=0.01):
+def build_preprocessor(use_job_context=False, use_country=False, min_freq=0.01,
+                       multi_cols=MULTI, skill_counts=False):
     """Return a ColumnTransformer for the chosen feature group."""
     numeric_pipe = Pipeline([
         ("impute", SimpleImputer(strategy="median")),
@@ -27,10 +28,21 @@ def build_preprocessor(use_job_context=False, use_country=False, min_freq=0.01):
 
     parts = [
         ("num", numeric_pipe, NUMERIC),
-        ("multi", MultiHotEncoder(min_freq=min_freq), MULTI),
+        ("multi", MultiHotEncoder(min_freq=min_freq), list(multi_cols)),
     ]
+    if skill_counts:
+        parts.append(("counts", Pipeline([("count", SkillCounts()),
+                                          ("scale", StandardScaler())]), list(multi_cols)))
     cat_cols = (JOB_CONTEXT if use_job_context else []) + (["Country"] if use_country else [])
     if cat_cols:
         parts.append(("cat", categorical_pipe, cat_cols))
 
     return ColumnTransformer(parts, remainder="drop")
+
+
+def build_category_indexer(cols):
+    """Integer codes for categorical columns (0 = missing/unseen), for Keras embeddings."""
+    return Pipeline([
+        ("impute", SimpleImputer(strategy="constant", fill_value="Unknown")),
+        ("codes", OrdinalEncoder(handle_unknown="use_encoded_value", unknown_value=-1)),
+    ])

@@ -40,3 +40,24 @@ class MultiHotEncoder(BaseEstimator, TransformerMixin):
 
     def get_feature_names_out(self, input_features=None):
         return np.array(self.feature_names_)
+
+class SkillCounts(BaseEstimator, TransformerMixin):
+    """Number of answers ticked in each multi-select column (breadth of skills).
+    Nothing is learned, so fit only records the column names."""
+
+    def __init__(self, sep=";"):
+        self.sep = sep
+
+    def fit(self, X, y=None):
+        self.columns_ = list(pd.DataFrame(X).columns)
+        return self
+
+    def transform(self, X):
+        X = pd.DataFrame(X)
+        return np.column_stack([
+            X[c].fillna("").astype(str).apply(
+                lambda s: sum(1 for t in s.split(self.sep) if t.strip()))
+            for c in self.columns_]).astype(np.float32)
+
+    def get_feature_names_out(self, input_features=None):
+        return np.array([f"n_{c}" for c in self.columns_])
