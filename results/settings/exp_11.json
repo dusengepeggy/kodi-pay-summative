@@ -100,7 +100,7 @@
     "scikit-learn": "1.9.1",
     "tensorflow": "2.22.0-rc0"
   },
-  "timestamp": "2026-10-17T14:14:14",
+  "timestamp": "2026-10-17T14:39:22",
   "fit_seconds": 49.0,
   "n_train": 49389,
   "n_val": 10609,
