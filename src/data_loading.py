@@ -22,7 +22,7 @@ def download_data(year: int) -> Path:
 
 def load_years(years = (2023,  2024, 2025)) -> dict:
     """Return {year: DataFrame} for the requested survey years."""
-    return {y: pd.read_csv(download_data(y)) for y in years}
+    return {y: pd.read_csv(download_data(y), low_memory=False) for y in years}
 
 def harmonize(frames: dict) -> pd.DataFrame:
     """Keep only columns shared by all years and stack them with a Year column."""

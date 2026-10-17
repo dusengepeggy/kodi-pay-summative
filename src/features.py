@@ -65,7 +65,8 @@ def add_basic_features(df):
     bad_work = (out["WorkExp_num"] > MAX_YEARS) | \
                (out["WorkExp_num"] > age_hi - MIN_START_AGE_WORK)
 
-    out["n_implausible_years"] = int(bad_code.sum() + bad_work.sum())
+    # count kept in attrs so it is not a constant feature column
+    out.attrs["n_implausible_years"] = int(bad_code.sum() + bad_work.sum())
     out["YearsCode_num"] = out["YearsCode_num"].mask(bad_code)
     out["WorkExp_num"] = out["WorkExp_num"].mask(bad_work)
 
