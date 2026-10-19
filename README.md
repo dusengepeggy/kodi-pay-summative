@@ -4,9 +4,9 @@ Can a developer's profile (experience, education, skills, role, how they learned
 
 | Link | |
 |---|---|
-| Report | _add link_ |
-| Google Drive (raw data zip + best models) | _add link_ |
-| Demo video | _add link_ |
+| Report | https://docs.google.com/document/d/1GqQxlZUkEGbw2XH9oTLGnlSslg4Wpt1LTshG9xOyiw4/edit?usp=sharing |
+| Google Drive  | https://drive.google.com/file/d/1kCtNuiGKyja-_s-qk2EPB5xOspav-f5-/view?usp=drive_link |
+| Demo video | https://youtu.be/mI7BPJSyhYM|
 
 ## Dataset
 
